@@ -1,0 +1,11 @@
+{
+    "options": {
+      "includeOnly": "^src",      
+      "exclude": ["node_modules"], 
+      "outputType": "dot",  
+      "graph": {
+        "direction": "BT"
+      }
+    }    
+  }
+  

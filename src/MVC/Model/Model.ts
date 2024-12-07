@@ -11,7 +11,8 @@ export class Model implements IModel {
     private endGameCallback: ((isVisible: boolean) => void) | null = null;
     public endGAme: boolean = false;
     private magnetModel: MagnetModel;
-
+    private lightLamp: PointLight;
+    
     constructor(scene: Scene, physicsPlugin: HavokPlugin) {
         this.scene = scene;
         //TODO: Remove Havok for this game.
@@ -19,9 +20,9 @@ export class Model implements IModel {
         
         //TODO: Create glow effect to lamp material.
         //TODO: Create a LightLampModel class.        
-        const lightLamp: PointLight = new PointLight("LightLamp", new Vector3(13, 8.5, -5.5), this.scene);
-        lightLamp.intensity = 10
-        lightLamp.diffuse = Color3.FromHexString('#5C3E04')
+        this.lightLamp = new PointLight("LightLamp", new Vector3(13, 8.5, -5.5), this.scene);
+        this.lightLamp.intensity = 10
+        this.lightLamp.diffuse = Color3.FromHexString('#5C3E04')
 
         //https://pixabay.com/pt/music/otimista-legendary-paganini-caprice-house-background-music-for-video-full-ver-271219/
         //Music by Maksym Dudchyk from Pixabay
@@ -42,6 +43,7 @@ export class Model implements IModel {
 
     private updateSceneModels() {
         this.scene.onBeforeRenderObservable.add(() => {
+            this.lightLamp.intensity = this.magnetModel.angularVelocity*500;
         });
     }
     private keyboardInput() {

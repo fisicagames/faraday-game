@@ -7,7 +7,7 @@ export class MagnetModel {
     private angularAcceleration: number = 0;
     private maxAngularVelocity: number = 150;
     private angularFriction: number = 0.05;
-    private angularAccelerationIncrement: number = 1.2;
+    private angularAccelerationIncrement: number = 2.0;
 
     constructor(scene: Scene) {
         this.scene = scene;
@@ -25,13 +25,12 @@ export class MagnetModel {
 
     private updateMagnetPosition(): void {
         this.scene.onBeforeRenderObservable.add(() => {
+            this.angularFriction = this.angularVelocity/500 + 0.05
             this.angularVelocity += this.angularAcceleration;
             this.angularVelocity = Math.max(
                 Math.min(this.angularVelocity, this.maxAngularVelocity),
                 -this.maxAngularVelocity
             );
-            if(this.angularVelocity> 60) console.log("Maior que 29");
-
             if (this.angularAcceleration === 0) {
                 if (this.angularVelocity > 0) {
                     this.angularVelocity -= this.angularFriction;

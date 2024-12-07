@@ -1,0 +1,109 @@
+// Utilitário para validar implementações estritas
+type StrictImplementation<T, U extends T> = U;
+
+/**
+ * Adicionando suporte a Callbacks no Mediator
+ */
+interface ComponentCallback {
+    (message: string): void;
+}
+
+interface Component1Mediator {
+    componentEventA(callback?: ComponentCallback): void;
+}
+
+interface Component2Mediator {
+    componentEventD(callback?: ComponentCallback): void;
+}
+
+/**
+ * Mediador concreto implementando ambas as interfaces de mediação.
+ */
+class ConcreteMediator
+    implements StrictImplementation<Component1Mediator & Component2Mediator, ConcreteMediator>
+{
+    private component1: Component1;
+    private component2: Component2;
+
+    constructor(c1: Component1, c2: Component2) {
+        this.component1 = c1;
+        this.component1.setMediator(this);
+        this.component2 = c2;
+        this.component2.setMediator(this);
+    }
+
+    public componentEventA(callback?: ComponentCallback): void {
+        console.log('Mediator reacts on A and triggers following operations:');
+        this.component2.doC();
+        if (callback) {
+            callback('ComponentEventA completed');
+        }
+    }
+
+    public componentEventD(callback?: ComponentCallback): void {
+        console.log('Mediator reacts on D and triggers following operations:');
+        this.component1.doB();
+        this.component2.doC();
+        if (callback) {
+            callback('ComponentEventD completed');
+        }
+    }
+}
+
+/**
+ * Component1 que usa o mediador genérico.
+ */
+class Component1 {
+    private mediator!: Component1Mediator;
+
+    public setMediator(mediator: Component1Mediator): void {
+        this.mediator = mediator;
+    }
+
+    public doA(): void {
+        console.log('Component 1 does A.');
+        this.mediator.componentEventA((message) => {
+            console.log(`Callback from Mediator: ${message}`);
+        });
+    }
+
+    public doB(): void {
+        console.log('Component 1 does B.');
+    }
+}
+
+/**
+ * Component2 que usa o mediador genérico.
+ */
+class Component2 {
+    private mediator!: Component2Mediator;
+
+    public setMediator(mediator: Component2Mediator): void {
+        this.mediator = mediator;
+    }
+
+    public doC(): void {
+        console.log('Component 2 does C.');
+    }
+
+    public doD(): void {
+        console.log('Component 2 does D.');
+        this.mediator.componentEventD((message) => {
+            console.log(`Callback from Mediator: ${message}`);
+        });
+    }
+}
+
+/**
+ * Código cliente para iniciar a interação.
+ */
+const c1 = new Component1();
+const c2 = new Component2();
+const mediator = new ConcreteMediator(c1, c2);
+
+console.log('Client triggers operation A.');
+c1.doA();
+
+console.log('');
+console.log('Client triggers operation D.');
+c2.doD();

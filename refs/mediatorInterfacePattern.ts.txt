@@ -1,0 +1,138 @@
+// Utilitário para validar implementações estritas
+type StrictImplementation<T, U extends T> = U;
+
+/**
+ * Interface para o Component1 interagir com o Mediator.
+ */
+interface Component1Mediator {
+    componentEventA(): void;
+}
+
+/**
+ * Interface para o Component2 interagir com o Mediator.
+ */
+interface Component2Mediator {
+    componentEventD(): void;
+}
+
+/**
+ * Interface para Component1.
+ */
+interface Component1Interface {
+    setMediator(mediator: Component1Mediator): void;
+    doA(): void;
+    doB(): void;
+}
+
+/**
+ * Interface para Component2.
+ */
+interface Component2Interface {
+    setMediator(mediator: Component2Mediator): void;
+    doC(): void;
+    doD(): void;
+}
+
+/**
+ * Interface para métodos específicos do ConcreteMediator.
+ */
+interface ConcreteMediatorMethods {
+    additionalLogic(): void; // Exemplo de método específico do ConcreteMediator
+}
+
+/**
+ * Interface para validar o Mediator completo.
+ */
+interface Mediator extends Component1Mediator, Component2Mediator, ConcreteMediatorMethods {}
+
+/**
+ * Concrete Mediator implementa todas as interfaces.
+ */
+class ConcreteMediator implements StrictImplementation<Mediator, ConcreteMediator>
+{
+    private component1: Component1;
+    private component2: Component2;
+
+    constructor(c1: Component1, c2: Component2) {
+        this.component1 = c1;
+        this.component1.setMediator(this);
+        this.component2 = c2;
+        this.component2.setMediator(this);
+    }
+
+    public componentEventA(): void {
+        console.log('Mediator reacts on A and triggers following operations:');
+        this.component2.doC();
+    }
+
+    public componentEventD(): void {
+        console.log('Mediator reacts on D and triggers following operations:');
+        this.component1.doB();
+        this.component2.doC();
+    }
+
+    public additionalLogic(): void {
+        console.log('ConcreteMediator has additional logic.');
+    }
+
+    // Qualquer método não declarado em ConcreteMediatorMethods será acusado como erro!
+}
+
+/**
+ * Component1 implementa Component1Interface.
+ */
+class Component1
+    implements StrictImplementation<Component1Interface, Component1>
+{
+    private mediator!: Component1Mediator;
+
+    public setMediator(mediator: Component1Mediator): void {
+        this.mediator = mediator;
+    }
+
+    public doA(): void {
+        console.log('Component 1 does A.');
+        this.mediator.componentEventA(); // Chamando o método do Mediator.
+    }
+
+    public doB(): void {
+        console.log('Component 1 does B.');
+        // Método adicional permitido pela lógica de negócio.
+    }
+}
+
+/**
+ * Component2 implementa Component2Interface.
+ */
+class Component2
+    implements StrictImplementation<Component2Interface, Component2>
+{
+    private mediator!: Component2Mediator;
+
+    public setMediator(mediator: Component2Mediator): void {
+        this.mediator = mediator;
+    }
+
+    public doC(): void {
+        console.log('Component 2 does C.');
+    }
+
+    public doD(): void {
+        console.log('Component 2 does D.');
+        this.mediator.componentEventD(); // Chamando o método do Mediator.
+    }
+}
+
+/**
+ * Código cliente para iniciar a interação.
+ */
+const c1 = new Component1();
+const c2 = new Component2();
+const mediator = new ConcreteMediator(c1, c2);
+
+console.log('Client triggers operation A.');
+c1.doA();
+
+console.log('');
+console.log('Client triggers operation D.');
+c2.doD();

@@ -1,6 +1,7 @@
 import { Scene, HavokPlugin, KeyboardEventTypes, Vector3, PointLight, Color3, TransformNode} from "@babylonjs/core";
 import { IModel } from "./IModel";
 import { SoundModel } from "./SoundModel";
+import { MagnetModel } from "./MagnetModel";
 
 export class Model implements IModel {
     private scene: Scene;
@@ -9,7 +10,7 @@ export class Model implements IModel {
     private physicsPlugin: HavokPlugin;
     private endGameCallback: ((isVisible: boolean) => void) | null = null;
     public endGAme: boolean = false;
-    private magnetNode: TransformNode | null;
+    private magnetModel: MagnetModel;
 
     constructor(scene: Scene, physicsPlugin: HavokPlugin) {
         this.scene = scene;
@@ -24,16 +25,16 @@ export class Model implements IModel {
 
         //https://pixabay.com/pt/music/otimista-legendary-paganini-caprice-house-background-music-for-video-full-ver-271219/
         //Music by Maksym Dudchyk from Pixabay
-        this.backgroundMusic = new SoundModel(this.scene, "backgroundSound", "./assets/sounds/legendary-paganini-caprice-house-background-music-for-video-full-ver-271219-compress.mp3", true);
+        this.backgroundMusic = new SoundModel(
+            this.scene, 
+            "backgroundSound", 
+            "./assets/sounds/legendary-paganini-caprice-house-background-music-for-video-full-ver-271219-compress.mp3", 
+            true
+        );
         this.backgroundMusic.setVolume(0.7);
         this.allSounds.push(this.backgroundMusic);
-        
-        this.magnetNode = this.scene.getTransformNodeById('Magnet')
-        const textN_Mesh = this.scene.getMeshByName(`TextN`);
-        const textS_Mesh = this.scene.getMeshByName(`TextS`);
-        textN_Mesh?.setParent(this.magnetNode)
-        textS_Mesh?.setParent(this.magnetNode)
 
+        this.magnetModel = new MagnetModel(this.scene);
 
         this.keyboardInput();
         this.updateSceneModels();
@@ -48,13 +49,12 @@ export class Model implements IModel {
 
         this.scene.onKeyboardObservable.add((kbInfo) => {
             switch (kbInfo.type) {
-                case KeyboardEventTypes.KEYDOWN:
+                case KeyboardEventTypes.KEYUP:
                     if (kbInfo.event.key === "w" ||
                         kbInfo.event.key === "W" ||
                         kbInfo.event.key === "ArrowUp" ||
                         kbInfo.event.key === " ") {
-                            this.magnetNode?.rotate(new Vector3(0,0,1),0.1)
-
+                            this.magnetModel.addAngularAcceleration();
                     }
                     if (kbInfo.event.key === "q"){
 

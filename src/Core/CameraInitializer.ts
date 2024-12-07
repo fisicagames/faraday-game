@@ -1,7 +1,7 @@
 import { Scene, Vector3, FollowCamera, UniversalCamera, AbstractMesh } from "@babylonjs/core";
 
 export class CameraInitializer {
-    public static createFollowCamera(scene: Scene, targetMesh: AbstractMesh = null): FollowCamera {
+    public static createFollowCamera(scene: Scene, targetMesh: AbstractMesh | null = null): FollowCamera {
         const camera = new FollowCamera("FollowCam", new Vector3(-40, 5, 0), scene);
         camera.radius = 30;
         camera.heightOffset = 10;
@@ -13,9 +13,11 @@ export class CameraInitializer {
     }
 
     public static createUniversalCamera(scene: Scene, canvas: HTMLCanvasElement): UniversalCamera {
-        const camera = new UniversalCamera("UniversalCamera", new Vector3(0, 10, -20), scene);
-        camera.setTarget(Vector3.Zero());
-        camera.attachControl(canvas, true);
+        const camera = new UniversalCamera("UniversalCamera", new Vector3(4, 10, -60), scene);
+        //camera.setTarget(Vector3.Zero());
+        camera.setTarget(new Vector3(4, 10, 0));
+        //Add the line bellow to control the camera with mouse:
+        //camera.attachControl(canvas, true);
         return camera;
     }
 }

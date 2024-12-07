@@ -3,7 +3,6 @@ import { IModel } from "../Model/IModel";
 import { IView } from "../View/IView";
 import { CameraController } from "./CameraController";
 
-
 export class Controller {
     private scene: Scene;
     private model: IModel;
@@ -21,7 +20,8 @@ export class Controller {
         this.model = model;
         this.view = view;
         this.setupControls();
-        this.setupCamera();
+
+        this.followCamera = this.scene.activeCamera as FollowCamera;
 
         this.model.setScoreUpdateCallback((newScore) => {
             this.view.updateScoreText(newScore);
@@ -51,10 +51,6 @@ export class Controller {
         this.view.buttonUpDown(() => { this.isUpPressed = true; });
         this.view.buttonUpUp(() => { this.isUpPressed = false; });
 
-    }
-
-    private setupCamera(): void {
-        this.followCamera = this.scene.activeCamera as FollowCamera;
     }
 
     public setCameraTarget(target: Vector3 | Mesh): void {

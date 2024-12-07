@@ -9,33 +9,33 @@ import { ViewPendulumPhrase } from "./ViewPendulumPhrase";
 export class View implements IView {
     private scene: Scene;
     public advancedTexture: AdvancedDynamicTexture;
-    private rectangleMenu: Rectangle;
-    private buttonMenuStart: Button;
-    private buttonMenuMoon: Button;
-    private buttonMenuJupiter: Button;
-    private buttonMenuContinuar: Button;
-    private buttonMenu: Button;
-    private textblockLevel: TextBlock;
-    private rectangleTouch: Rectangle;
-    private rectangleTop: Rectangle;
-    public textblockMenuMusic: TextBlock;
+    private rectangleMenu!: Rectangle;
+    private buttonMenuStart!: Button;
+    private buttonMenuMoon!: Button;
+    private buttonMenuJupiter!: Button;
+    private buttonMenuContinuar!: Button;
+    private buttonMenu!: Button;
+    private textblockLevel!: TextBlock;
+    private rectangleTouch!: Rectangle;
+    private rectangleTop!: Rectangle;
+    public textblockMenuMusic!: TextBlock;
     private isMusicOn: boolean = true;
-    private buttonLang: Button;
+    private buttonLang!: Button;
     private languageSwitcher: ViewLanguageSwitcher;
-    private buttonUp: Button;
-    private buttonDown: Button;
-    private buttonRight: Button;
-    private buttonLeft: Button;
+    private buttonUp!: Button;
+    private buttonDown!: Button;
+    private buttonRight!: Button;
+    private buttonLeft!: Button;
 
-    private rectangleGame: Rectangle;
-    private textblockMenuBest: TextBlock;
-    private textblockTotalScore: TextBlock;
+    private rectangleGame!: Rectangle;
+    private textblockMenuBest!: TextBlock;
+    private textblockTotalScore!: TextBlock;
 
     private topScore: number = 0;
 
-    private textblockScoreGame: TextBlock;
-    private textblockCenterPhrase: TextBlock;
-    private textblockSecond: TextBlock;
+    private textblockScoreGame!: TextBlock;
+    private textblockCenterPhrase!: TextBlock;
+    private textblockSecond!: TextBlock;
 
     constructor(scene: Scene, advancedTexture: AdvancedDynamicTexture) {
         this.scene = scene;

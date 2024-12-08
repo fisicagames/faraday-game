@@ -48,8 +48,9 @@ export class Controller {
         this.view.onToggleMusic(() => this.toggleMusic());
         this.view.onButtonLang(() => this.changeLanguage());
 
-        this.view.buttonUpDown(() => { this.isUpPressed = true; });
-        this.view.buttonUpUp(() => { this.isUpPressed = false; });
+        //this.view.buttonUpDown(() => { this.isUpPressed = true; });
+        //this.view.onButtonUpUp(() => { this.isUpPressed = false; });
+        this.view.setButtonUpUpCallback(() => this.model.addAccelerationToMagnet());
 
     }
 

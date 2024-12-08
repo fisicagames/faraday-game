@@ -9,7 +9,7 @@ export interface IView {
     onToggleMusic(callback: () => void): void;
     onButtonLang(callback: () => void): void;
 
-    buttonUpUp(callback: () => void): void;
+    setButtonUpUpCallback(callback: () => void): void;
     buttonDownUp(callback: () => void): void;
     buttonRightUp(callback: () => void): void;
     buttonLeftUp(callback: () => void): void;

@@ -12,7 +12,7 @@ export class Model implements IModel {
     public endGAme: boolean = false;
     private magnetModel: MagnetModel;
     private lightLamp: PointLight;
-    
+
     constructor(scene: Scene, physicsPlugin: HavokPlugin) {
         this.scene = scene;
         //TODO: Remove Havok for this game.
@@ -44,6 +44,7 @@ export class Model implements IModel {
     private updateSceneModels() {
         this.scene.onBeforeRenderObservable.add(() => {
             this.lightLamp.intensity = this.magnetModel.angularVelocity*500;
+            this.onUpdateScoreCallback(Math.ceil(this.magnetModel.angularVelocity));
         });
     }
     private keyboardInput() {
@@ -56,7 +57,7 @@ export class Model implements IModel {
                         kbInfo.event.key === "W" ||
                         kbInfo.event.key === "ArrowUp" ||
                         kbInfo.event.key === " ") {
-                            this.magnetModel.addAngularAcceleration();
+                            this.addAccelerationToMagnet();
                     }
                     if (kbInfo.event.key === "q"){
 
@@ -66,6 +67,9 @@ export class Model implements IModel {
         });
     }
 
+    public addAccelerationToMagnet(){
+        this.magnetModel.addAngularAcceleration();
+    }
     public toggleMusicPlayback(): void {
         this.backgroundMusic.togglePlayback();
     }
@@ -73,8 +77,11 @@ export class Model implements IModel {
     public setEndGameCallback(callback: (isVisible: boolean) => void): void {
         this.endGameCallback = callback;
     }
-    public setScoreUpdateCallback(callback: (newScore: number) => void): void {
-     
-    }    
 
+    private onUpdateScoreCallback: (newScore: number) => void = () => {
+        console.warn("No callback registered for score updates.");
+    };
+    public setScoreUpdateCallback(callback: (newScore: number) => void): void {
+        this.onUpdateScoreCallback = callback;
+    }
 }

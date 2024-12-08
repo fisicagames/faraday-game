@@ -128,7 +128,7 @@ export class View implements IView {
         this.textblockMenuMusic.text = this.isMusicOn ? "🔊" : "🔈";
     }
 
-    public buttonUpUp(callback: () => void): void {
+    public setButtonUpUpCallback(callback: () => void): void {
         this.buttonUp.onPointerUpObservable.add(callback);
     }
     public buttonDownUp(callback: () => void): void {
@@ -154,9 +154,9 @@ export class View implements IView {
     }
 
     public updateScoreText(newScore: number): void {
-        this.textblockLevel.text = `Goals: ` + this.getScoreDisplay(newScore);
+        this.textblockLevel.text = `Tensão: ` + newScore + ` Volts. \n Tensão Máxima: ` + this.getScoreDisplay(this.topScore);
         //TODO: Remove next two lines for run only when endGame event. Send to show end game?
-        this.textblockTotalScore.text = `Goals: ` + this.getScoreDisplay(newScore) + ` 🏆`;
+        this.textblockTotalScore.text = `Tensão: ` + this.getScoreDisplay(newScore) + ` 🏆`;
         this.textblockScoreGame.text = ViewBallOutPhrase.getRandomBallOutPhrase(this.languageSwitcher.languageOption);
         if(this.topScore < newScore) {
             this.topScore = newScore;
@@ -165,14 +165,14 @@ export class View implements IView {
     }
 
     private getScoreDisplay(score: number): string {
-        if (score < 10) {
-            return `${score}`;
-        } else if (score < 30) {
-            return `${score} 🥉`; 
+        if (score < 24) {
+            return `${score} V`;
         } else if (score < 60) {
-            return `${score} 🥈`; 
+            return `${score} V 🥉`; 
+        } else if (score < 110) {
+            return `${score} V 🥈`; 
         } else {
-            return `${score} 🥇`; 
+            return `${score} V 🥇`; 
         }
     }
 

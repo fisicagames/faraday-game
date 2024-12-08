@@ -10,9 +10,9 @@ export class View implements IView {
     private scene: Scene;
     public advancedTexture: AdvancedDynamicTexture;
     private rectangleMenu!: Rectangle;
-    private buttonMenuStart!: Button;
-    private buttonMenuMoon!: Button;
-    private buttonMenuJupiter!: Button;
+    private buttonMenuStartA!: Button;
+    private buttonMenuStartB!: Button;
+    private buttonMenuStartC!: Button;
     private buttonMenuContinuar!: Button;
     private buttonMenu!: Button;
     private textblockLevel!: TextBlock;
@@ -49,9 +49,9 @@ export class View implements IView {
     }
 
     private initializeGUI() {
-        this.buttonMenuStart = this.advancedTexture.getControlByName("ButtonMenuStart") as Button;
-        this.buttonMenuMoon = this.advancedTexture.getControlByName("ButtonMenuStartMoon") as Button;
-        this.buttonMenuJupiter = this.advancedTexture.getControlByName("ButtonMenuStartJupiter") as Button;
+        this.buttonMenuStartA = this.advancedTexture.getControlByName("ButtonMenuStartA") as Button;
+        this.buttonMenuStartB = this.advancedTexture.getControlByName("ButtonMenuStartB") as Button;
+        this.buttonMenuStartC = this.advancedTexture.getControlByName("ButtonMenuStartC") as Button;
         this.buttonMenu = this.advancedTexture.getControlByName("ButtonMenu") as Button;
         this.buttonMenu.isVisible = false;
         this.buttonMenuContinuar = this.advancedTexture.getControlByName("ButtonMenuContinuar") as Button;        
@@ -96,14 +96,14 @@ export class View implements IView {
         this.textblockCenterPhrase.isVisible = !isVisible;
     }
 
-    public onButtonMenuStart(callback: () => void): void {
-        this.buttonMenuStart.onPointerUpObservable.add(callback);
+    public onButtonMenuStartA(callback: () => void): void {
+        this.buttonMenuStartA.onPointerUpObservable.add(callback);
     }
-    public onButtonMenuMoon(callback: () => void): void {
-        this.buttonMenuMoon.onPointerUpObservable.add(callback);
+    public onButtonMenuStartB(callback: () => void): void {
+        this.buttonMenuStartB.onPointerUpObservable.add(callback);
     }
-    public onButtonMenuJupiter(callback: () => void): void {
-        this.buttonMenuJupiter.onPointerUpObservable.add(callback);
+    public onButtonMenuStartC(callback: () => void): void {
+        this.buttonMenuStartC.onPointerUpObservable.add(callback);
     }
     public onButtonMenuContinuar(callback: () => void): void {
         this.buttonMenuContinuar.onPointerUpObservable.add(callback);
@@ -185,5 +185,9 @@ export class View implements IView {
         else{
             this.textblockCenterPhrase.isVisible = isVisible;
         }        
+    }
+
+    public changeButtonUPSymbol(string: string){
+        this.buttonUp.textBlock.text = string;
     }
 }

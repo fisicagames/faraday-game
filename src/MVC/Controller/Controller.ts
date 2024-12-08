@@ -40,9 +40,9 @@ export class Controller {
     }
     private setupControls() {
 
-        this.view.onButtonMenuMoon(() => this.startGame());
-        this.view.onButtonMenuJupiter(() => this.startGame());
-        this.view.onButtonMenuStart(() => this.startGame());
+        this.view.onButtonMenuStartA(() => this.startGameAngular());
+        this.view.onButtonMenuStartB(() => this.startGameLinear());
+        this.view.onButtonMenuStartC(() => this.startGameAngular());
         this.view.onButtonMenuContinuar(() => this.continueGame());
         this.view.onButtonMenu(() => this.showMenu());
         this.view.onToggleMusic(() => this.toggleMusic());
@@ -69,7 +69,14 @@ export class Controller {
         }
     }
 
-    private startGame(): void {
+    private startGameAngular(): void {
+        this.view.changeButtonUPSymbol(`↻`);
+        this.model.resetMagnetPosition("angular");
+        this.continueGame();
+    }
+    private startGameLinear(): void {
+        this.view.changeButtonUPSymbol(`⇅`);
+        this.model.resetMagnetPosition("linear");
         this.continueGame();
     }
     private continueGame(){

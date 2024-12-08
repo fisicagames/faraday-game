@@ -43,8 +43,14 @@ export class Model implements IModel {
 
     private updateSceneModels() {
         this.scene.onBeforeRenderObservable.add(() => {
-            this.lightLamp.intensity = this.magnetModel.angularVelocity*500;
-            this.onUpdateScoreCallback(Math.ceil(this.magnetModel.angularVelocity));
+            if(this.magnetModel.getMode() == "angular"){
+                this.lightLamp.intensity = this.magnetModel.angularVelocity*500;
+                this.onUpdateScoreCallback(Math.ceil(this.magnetModel.angularVelocity));
+            }
+            else if(this.magnetModel.getMode() == "linear"){
+                this.lightLamp.intensity = Math.abs(this.magnetModel.linearVelocity*500);
+                this.onUpdateScoreCallback(Math.ceil(this.magnetModel.linearVelocity));
+            }
         });
     }
     private keyboardInput() {
@@ -68,7 +74,7 @@ export class Model implements IModel {
     }
 
     public addAccelerationToMagnet(){
-        this.magnetModel.addAngularAcceleration();
+        this.magnetModel.addAcceleration();
     }
     public toggleMusicPlayback(): void {
         this.backgroundMusic.togglePlayback();
@@ -83,5 +89,11 @@ export class Model implements IModel {
     };
     public setScoreUpdateCallback(callback: (newScore: number) => void): void {
         this.onUpdateScoreCallback = callback;
+    }
+
+    public resetMagnetPosition(mode: "angular" | "linear"){
+        this.magnetModel.setMode(mode);
+        this.magnetModel.resetMagnetPosition();
+
     }
 }

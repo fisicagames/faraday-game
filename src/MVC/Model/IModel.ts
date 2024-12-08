@@ -3,4 +3,5 @@ export interface IModel {
     setScoreUpdateCallback(callback: (newScore: number) => void): void;
     setEndGameCallback(callback: (isVisible: boolean) => void): void;    
     addAccelerationToMagnet(): void;
+    resetMagnetPosition(mode: "angular" | "linear"): void;
 }

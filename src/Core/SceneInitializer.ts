@@ -1,6 +1,6 @@
 //With HavokPhysicsEngine
 import "@babylonjs/loaders";
-import { Engine, Scene, Vector3, HemisphericLight, ScenePerformancePriority, Color4 } from "@babylonjs/core";
+import { Engine, Scene, Vector3, HemisphericLight, ScenePerformancePriority, Color4, HavokPlugin } from "@babylonjs/core";
 import { CameraInitializer } from "./CameraInitializer";
 import { optimizeMaterials } from "./MaterialOptimizer";
 import { GUILoader } from "./GUILoader";
@@ -12,15 +12,17 @@ export class SceneInitializer {
     private _canvas: HTMLCanvasElement;
     private _engine: Engine;
     private _scene: Scene;
+    private useHavok: boolean;
 
     public get scene(): Scene {
         return this._scene;
     }
 
-    constructor(canvas: HTMLCanvasElement, engine: Engine) {
+    constructor(canvas: HTMLCanvasElement, engine: Engine, useHavok = false) {
         this._canvas = canvas;
         this._engine = engine;
         this._scene = new Scene(this._engine);
+        this.useHavok = useHavok; 
         this.initialize();
     }
 
@@ -36,8 +38,11 @@ export class SceneInitializer {
         const followCamera = CameraInitializer.createFollowCamera(this._scene);
         this._scene.activeCamera = universalCamera; // Or followCamera
 
-        const physicsEngine = new HavokPhysicsEngine();
-        const physicsPlugin = await physicsEngine.initialize(this._scene);
+        let physicsPlugin: HavokPlugin | null = null;
+        if (this.useHavok) {
+            const physicsEngine = new HavokPhysicsEngine();
+            physicsPlugin = await physicsEngine.initialize(this._scene);
+        }
 
         const mvc = new MVC(this._scene, advancedTexture, physicsPlugin);
 

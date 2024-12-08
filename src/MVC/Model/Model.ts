@@ -7,16 +7,16 @@ export class Model implements IModel {
     private scene: Scene;
     public backgroundMusic: SoundModel;
     private allSounds: SoundModel[] = [];
-    private physicsPlugin: HavokPlugin;
+    private physicsPlugin: HavokPlugin | null;
     private endGameCallback: ((isVisible: boolean) => void) | null = null;
     public endGAme: boolean = false;
     private magnetModel: MagnetModel;
     private lightLamp: PointLight;
 
-    constructor(scene: Scene, physicsPlugin: HavokPlugin) {
+    constructor(scene: Scene, physicsPlugin?: HavokPlugin | null) {
         this.scene = scene;
         //TODO: Remove Havok for this game.
-        this.physicsPlugin = physicsPlugin;
+        this.physicsPlugin = physicsPlugin || null;
         
         //TODO: Create glow effect to lamp material.
         //TODO: Create a LightLampModel class.        

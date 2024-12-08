@@ -12,7 +12,7 @@ export class MVC {
     private controller: Controller;
     private advancedTexture: AdvancedDynamicTexture;
 
-    constructor(scene: Scene, advancedTexture: AdvancedDynamicTexture, physicsPlugin: HavokPlugin ) {
+    constructor(scene: Scene, advancedTexture: AdvancedDynamicTexture, physicsPlugin?: HavokPlugin | null ) {
         this.scene = scene;
         this.advancedTexture = advancedTexture;
         this.model = new Model(this.scene, physicsPlugin);  // Model implements IModel

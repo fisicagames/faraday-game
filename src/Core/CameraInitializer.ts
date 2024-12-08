@@ -12,12 +12,14 @@ export class CameraInitializer {
         return camera;
     }
 
-    public static createUniversalCamera(scene: Scene, canvas: HTMLCanvasElement): UniversalCamera {
+    public static createUniversalCamera(scene: Scene, canvas?: HTMLCanvasElement): UniversalCamera {
         const camera = new UniversalCamera("UniversalCamera", new Vector3(4, 10, -60), scene);
         //camera.setTarget(Vector3.Zero());
-        camera.setTarget(new Vector3(4, 10, 0));
+        camera.setTarget(new Vector3(4, 11, 0));
         //Add the line bellow to control the camera with mouse:
-        //camera.attachControl(canvas, true);
+        if(canvas){
+            //camera.attachControl(canvas, true);
+        }
         return camera;
     }
 }

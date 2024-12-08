@@ -29,7 +29,7 @@ export class Model implements IModel {
         this.backgroundMusic = new SoundModel(
             this.scene, 
             "backgroundSound", 
-            "./assets/sounds/legendary-paganini-caprice-house-background-music-for-video-full-ver-271219-compress.mp3", 
+            "./assets/sounds/overdrive-play-271522_compress.mp3", 
             true
         );
         this.backgroundMusic.setVolume(0.7);

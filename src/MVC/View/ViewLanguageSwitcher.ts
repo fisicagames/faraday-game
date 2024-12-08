@@ -8,17 +8,18 @@ export class ViewLanguageSwitcher {
         this.languageOption = 0;
         this.strings = {
             ButtonLang: ["ENGLISH", "PORTUGUÊS"],
-            TextblockMeta: ["Objetivo: chute a bola e marque gols desviando dos pêndulos.", "Kick the ball and score goals while avoiding the pendulums."],
-            TextblockTitle: ["Pendulum Goal", "Pendulum Goal"], 
-            ButtonMenuStart: ["Terra: g = 9,8 m/s²", "Earth: g = 9.8 m/s²"],
-            ButtonMenuStartMoon: ["Lua: g = 1,6 m/s²", "Moon: g = 1.6 m/s²"],
-            ButtonMenuStartJupiter: ["Júpiter: g = 24,8 m/s²", "Jupiter: g = 24.8 m/s²"],
+            TextblockMeta: ["Objetivo: movimente o ímã para alterar o fluxo magnético e induzir corrente elétrica na bobina, iluminando a lâmpada com a máxima intensidade que conseguir!", "Goal: Move the magnet to alter the magnetic flux and induce an electric current in the coil, lighting the bulb as brightly as possible!"],
+            TextblockTitle: ["Faraday Game", "Faraday Game"], 
+            ButtonMenuStartA: ["Movimento Angular", "Angular Motion"],
+            ButtonMenuStartB: ["Movimento Linear", "Linear Motion"],
+            ButtonMenuStartC: ["None", "None"],
             TextblockMenuScore: ["Maior pontuação:", "High Score:"],
-            TextblockSecond: ["O pêndulo maior tem 22 m e o menor 6 m.", "Larger pendulum is 22 m, smaller is 6 m." ],
-            TextBlockThird: ["T: período (s), L: comprimento (m).","T: period (s), L: length (m)."],
-            TextBlockQuarter: ["g: aceleração da gravidade (m/s²).","g: gravitational acceleration (m/s²)."],
+            TextblockSecond: ["ℰ: força eletromotriz induzida (volts).", "ℰ: electromotive force induced (volts)." ],
+            TextBlockThird: ["N: número de espiras da bobina.","N: number of coil turns."],
+            TextBlockQuarter: ["ΔΦ: variação do fluxo magnético (weber).","ΔΦ: variation in magnetic flux (weber)."],
+            TextBlockFiver:  ["Δt: intervalo de tempo (segundos).","Δt: time interval (seconds)."],
             ButtonMenuContinuar: ["Reiniciar","Restart"],
-            TextblockScoreGame: ["Pontos:  000","Points: 000"],
+            TextblockScoreGame: ["Tensão:  0 Volts","Voltage: 0 Volts"],
             TextblockMusic: ["Música:","Music:"]
         };
     }

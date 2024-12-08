@@ -5,7 +5,7 @@ export class MagnetModel {
     private scene: Scene;
     public angularVelocity: number = 0;
     private angularAcceleration: number = 0;
-    private maxAngularVelocity: number = 150;
+    private maxAngularVelocity: number = 30000;
     private angularFriction: number = 0.05;
     private angularAccelerationIncrement: number = 2.0;
 

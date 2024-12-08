@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
     "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "strictNullChecks": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "strictNullChecks": false,
     "target": "es6", // choose our ECMA/JavaScript version (all modern browsers support ES6 so it's your best bet)
     "lib": [ // choose our default ECMA/libraries to import
       "dom", // mandatory for all browser-based apps

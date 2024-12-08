@@ -31,8 +31,11 @@ export class HavokDebugger {
             console.log(`Havok Debugger - Number of Bodies: ${numBodies}`);
             console.log(`Havok Debugger - Number of Shapes: ${numShapes}`);
         } catch (error) {
-            console.error("HavokDebugger Error:", error.message);
-        }
+            if (error instanceof Error) {
+                console.error("HavokDebugger Error:", error.message);
+            } else {
+                console.error("HavokDebugger Error: An unknown error occurred.");
+            }        }
     }
 
     public static getNumBodies(scene: Scene): number {

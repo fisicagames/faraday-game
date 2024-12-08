@@ -44,12 +44,15 @@ export class Model implements IModel {
     private updateSceneModels() {
         this.scene.onBeforeRenderObservable.add(() => {
             if(this.magnetModel.getMode() == "angular"){
-                this.lightLamp.intensity = this.magnetModel.angularVelocity*500;
-                this.onUpdateScoreCallback(Math.ceil(this.magnetModel.angularVelocity));
+                const angleY = this.magnetModel.getRotationAngleY();
+                const angularComponent = -Math.sin(angleY) * this.magnetModel.angularVelocity;
+                this.lightLamp.intensity = Math.abs(angularComponent * 500);
+                this.onUpdateScoreCallback(Math.ceil(angularComponent));
             }
             else if(this.magnetModel.getMode() == "linear"){
-                this.lightLamp.intensity = Math.abs(this.magnetModel.linearVelocity*500);
-                this.onUpdateScoreCallback(Math.ceil(this.magnetModel.linearVelocity));
+                const linearComponet = this.magnetModel.getPositionY();
+                this.lightLamp.intensity = Math.abs(this.magnetModel.linearVelocity*500*Math.cos(linearComponet/16.5));
+                this.onUpdateScoreCallback(Math.ceil(this.magnetModel.linearVelocity)*Math.sign(linearComponet));
             }
         });
     }

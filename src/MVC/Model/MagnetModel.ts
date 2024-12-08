@@ -116,4 +116,20 @@ export class MagnetModel {
     public getMode(): "angular" | "linear" {
         return this.mode;
     }
+
+    public getRotationAngleY(): number {
+        if (this.magnetNode && this.magnetNode.rotationQuaternion) {
+            const quaternion = this.magnetNode.rotationQuaternion;
+            const rotation = quaternion.toEulerAngles(); 
+            return rotation.z; // Retorna o ângulo em radianos
+        }
+        return 0;
+    }
+    public getPositionY(): number {
+        if (this.magnetNode) {
+            const positionY = this.magnetNode.position.y -8;
+            return positionY; // Retorna o ângulo em radianos
+        }
+        return 0;
+    }
 }

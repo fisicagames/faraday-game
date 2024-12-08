@@ -154,7 +154,8 @@ export class View implements IView {
     }
 
     public updateScoreText(newScore: number): void {
-        this.textblockLevel.text = `Tensão: ` + newScore + ` Volts. \n Tensão Máxima: ` + this.getScoreDisplay(this.topScore);
+        this.textblockLevel.text =  newScore + ` Volts. \n Tensão Máxima: ` + this.getScoreDisplay(this.topScore);
+        
         //TODO: Remove next two lines for run only when endGame event. Send to show end game?
         this.textblockTotalScore.text = `Tensão: ` + this.getScoreDisplay(newScore) + ` 🏆`;
         this.textblockScoreGame.text = ViewBallOutPhrase.getRandomBallOutPhrase(this.languageSwitcher.languageOption);

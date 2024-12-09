@@ -20,7 +20,11 @@ export class ViewLanguageSwitcher {
             TextBlockFiver:  ["Δt: intervalo de tempo (segundos).","Δt: time interval (seconds)."],
             ButtonMenuContinuar: ["Reiniciar","Restart"],
             TextblockScoreGame: ["Tensão:  0 Volts","Voltage: 0 Volts"],
-            TextblockMusic: ["Música:","Music:"]
+            TextblockMusic: ["Música:","Music:"],
+            TextblockAviso:  ["Aviso: este jogo contém efeitos visuais rápidos, incluindo luzes piscando e mudanças bruscas de iluminação, que podem não ser adequados para pessoas com epilepsia fotossensível ou outras condições relacionadas à luz. Escolha a configuração que melhor se adapta a você:","Warning: This game contains fast visual effects, including flashing lights and sudden changes in illumination, which may not be suitable for individuals with photosensitive epilepsy or other light-related conditions. Please choose the setting that works best for you:"],
+            ButtonEfeitoSuave: ["Efeito Suave","Soft Effect"],
+            ButtonEfeitoIntenso: ["Efeito Intenso","Intense Effect"],
+
         };
     }
 

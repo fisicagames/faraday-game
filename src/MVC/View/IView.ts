@@ -18,6 +18,9 @@ export interface IView {
     buttonDownDown(callback: () => void): void;
     buttonRightDown(callback: () => void): void;
     buttonLeftDown(callback: () => void): void;
+
+    onButtonEfeitoIntenso(callback: () => void): void;
+    onButtonEfeitoSuave(callback: () => void): void;
     
     updateMainMenuVisibility(isVisible: boolean): void;
     changeLanguage(): void;

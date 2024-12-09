@@ -37,6 +37,13 @@ export class View implements IView {
     private textblockCenterPhrase!: TextBlock;
     private textblockSecond!: TextBlock;
 
+    private rectangleAviso!: Rectangle;
+    private textblockAviso!: TextBlock;
+    private buttonEfeitoSuave!: Button;
+    private buttonEfeitoIntenso!: Button;
+
+    private firstTime: boolean = true;
+
     constructor(scene: Scene, advancedTexture: AdvancedDynamicTexture) {
         this.scene = scene;
         this.advancedTexture = advancedTexture;
@@ -84,6 +91,13 @@ export class View implements IView {
         this.textblockCenterPhrase = this.advancedTexture.getControlByName("TextblockCenterPhrase") as TextBlock;
         this.textblockCenterPhrase.isVisible = false;
         this.textblockSecond = this.advancedTexture.getControlByName("TextblockSecond") as TextBlock;
+
+
+        this.rectangleAviso = this.advancedTexture.getControlByName("RectangleAviso") as Rectangle;
+        this.textblockAviso = this.advancedTexture.getControlByName("TextblockAviso") as TextBlock;
+        this.buttonEfeitoSuave = this.advancedTexture.getControlByName("ButtonEfeitoSuave") as Button;
+        this.buttonEfeitoIntenso = this.advancedTexture.getControlByName("ButtonEfeitoIntenso") as Button;
+        this.rectangleAviso.isVisible = false;
     }
 
     public updateMainMenuVisibility(isVisible: boolean) {
@@ -96,11 +110,38 @@ export class View implements IView {
         this.textblockCenterPhrase.isVisible = !isVisible;
     }
 
+    public onButtonEfeitoSuave(callback: () => void){
+        this.buttonEfeitoSuave.onPointerUpObservable.add(() =>{
+            this.rectangleAviso.isVisible = false;
+            callback();
+        });         
+    };
+    public onButtonEfeitoIntenso(callback: () => void){
+        this.buttonEfeitoIntenso.onPointerUpObservable.add(() =>{
+            this.rectangleAviso.isVisible = false;
+            callback();
+        });           
+    };
+
+
     public onButtonMenuStartA(callback: () => void): void {
-        this.buttonMenuStartA.onPointerUpObservable.add(callback);
+        this.buttonMenuStartA.onPointerUpObservable.add(() => {
+            if(this.firstTime){
+                this.rectangleAviso.isVisible = true;
+                this.firstTime = false;
+            }      
+            callback();
+        });
     }
+    
     public onButtonMenuStartB(callback: () => void): void {
-        this.buttonMenuStartB.onPointerUpObservable.add(callback);
+        this.buttonMenuStartB.onPointerUpObservable.add(() => {
+            if(this.firstTime){
+                this.rectangleAviso.isVisible = true;
+                this.firstTime = false;
+            }  
+        callback();
+        });
     }
     public onButtonMenuStartC(callback: () => void): void {
         this.buttonMenuStartC.onPointerUpObservable.add(callback);

@@ -4,4 +4,6 @@ export interface IModel {
     setEndGameCallback(callback: (isVisible: boolean) => void): void;    
     addAccelerationToMagnet(): void;
     resetMagnetPosition(mode: "angular" | "linear"): void;
+    modeEffectIntense: boolean;
+
 }

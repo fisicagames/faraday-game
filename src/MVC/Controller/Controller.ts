@@ -47,6 +47,8 @@ export class Controller {
         this.view.onButtonMenu(() => this.showMenu());
         this.view.onToggleMusic(() => this.toggleMusic());
         this.view.onButtonLang(() => this.changeLanguage());
+        this.view.onButtonEfeitoIntenso(() => {this.model.modeEffectIntense = true});
+        this.view.onButtonEfeitoSuave(() => {this.model.modeEffectIntense = false});
 
         //this.view.buttonUpDown(() => { this.isUpPressed = true; });
         //this.view.onButtonUpUp(() => { this.isUpPressed = false; });

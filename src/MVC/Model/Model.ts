@@ -12,6 +12,8 @@ export class Model implements IModel {
     public endGAme: boolean = false;
     private magnetModel: MagnetModel;
     private lightLamp: PointLight;
+    public modeEffectIntense: boolean = true;
+
 
     constructor(scene: Scene, physicsPlugin?: HavokPlugin | null) {
         this.scene = scene;
@@ -46,12 +48,23 @@ export class Model implements IModel {
             if(this.magnetModel.getMode() == "angular"){
                 const angleY = this.magnetModel.getRotationAngleY();
                 const angularComponent = -Math.sin(angleY) * this.magnetModel.angularVelocity;
-                this.lightLamp.intensity = Math.abs(angularComponent * 500);
+                if(this.modeEffectIntense){
+                    this.lightLamp.intensity = Math.abs(angularComponent * 500);
+                }
+                else{
+                    this.lightLamp.intensity = Math.abs(this.magnetModel.angularVelocity * 500);
+                }                
                 this.onUpdateScoreCallback(Math.ceil(angularComponent));
             }
             else if(this.magnetModel.getMode() == "linear"){
                 const linearComponet = this.magnetModel.getPositionY();
-                this.lightLamp.intensity = Math.abs(this.magnetModel.linearVelocity*500*Math.cos(linearComponet/16.5));
+                if(this.modeEffectIntense){
+                    this.lightLamp.intensity = Math.abs(this.magnetModel.linearVelocity*500*Math.cos(linearComponet/16.5));
+                }
+                else{
+                    this.lightLamp.intensity = Math.abs(this.magnetModel.linearVelocity*500);
+                }
+                
                 this.onUpdateScoreCallback(Math.ceil(this.magnetModel.linearVelocity)*Math.sign(linearComponet));
             }
         });

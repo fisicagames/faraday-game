@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite';
+import ViteVisualizer from 'vite-bundle-visualizer';
 
 export default defineConfig({
   build: {
@@ -11,4 +12,11 @@ export default defineConfig({
       },
     },
   },
+  plugins: [
+    ViteVisualizer({
+      // Opções de configuração do plugin visualizer
+      open: true, // Se deve abrir o relatório automaticamente após a build
+      filename: 'bundle-report.html', // Nome do arquivo gerado
+    }),
+  ],
 });

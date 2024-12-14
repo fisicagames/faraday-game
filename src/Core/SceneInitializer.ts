@@ -1,5 +1,5 @@
 //With HavokPhysicsEngine
-import "@babylonjs/loaders";
+import "@babylonjs/loaders/glTF";
 import { Engine, Scene, Vector3, HemisphericLight, ScenePerformancePriority, Color4, HavokPlugin } from "@babylonjs/core";
 import { CameraInitializer } from "./CameraInitializer";
 import { optimizeMaterials } from "./MaterialOptimizer";

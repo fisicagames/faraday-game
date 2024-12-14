@@ -11,12 +11,5 @@ export default defineConfig({
         },
       },
     },
-  },
-  plugins: [
-    ViteVisualizer({
-      // Opções de configuração do plugin visualizer
-      open: true, // Se deve abrir o relatório automaticamente após a build
-      filename: 'bundle-report.html', // Nome do arquivo gerado
-    }),
-  ],
+  }
 });

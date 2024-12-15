@@ -1,5 +1,4 @@
 import { defineConfig } from 'vite';
-import ViteVisualizer from 'vite-bundle-visualizer';
 
 export default defineConfig({
   build: {

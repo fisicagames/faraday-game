@@ -12,7 +12,8 @@ export class Model implements IModel {
     public endGAme: boolean = false;
     private magnetModel: MagnetModel;
     private lightLamp: PointLight;
-    public modeEffectIntense: boolean = true;
+    //Change to false for age 3+:
+    public modeEffectIntense: boolean = false;
 
 
     constructor(scene: Scene, physicsPlugin?: HavokPlugin | null) {

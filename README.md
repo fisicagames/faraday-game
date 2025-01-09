@@ -33,7 +33,7 @@ O **Faraday Game** demonstra de forma prática a  **Lei de Faraday da Indução 
 2. **Controles:** Pressione o botão na tela (ou use toques múltiplos no celular ou teclas no teclado para explorar o "modo hack").
 3. **Modos de Jogo:**
    * **Angular:** Gire o ímã em frente à bobina.
-   * **Linear:** Faça o ímã passar verticalmente por dentro da bobina.
+   * **Linear:** Faça o ímã passar verticalmente por dentr da bobina.
 4. **Pontuação:** Gere tensões acima de 24V para alcançar medalhas e desafiar seus limites!
 
 ---
@@ -41,6 +41,8 @@ O **Faraday Game** demonstra de forma prática a  **Lei de Faraday da Indução 
 ## Telas do Jogo
 
 ![1736427437192](image/README/1736427437192.png)
+
+![1736430149649](image/README/1736430149649.png)
 
 ![1736427290232](image/README/1736427290232.png)
 

@@ -109,6 +109,7 @@ export class Model implements IModel {
     }
 
     public resetMagnetPosition(mode: "angular" | "linear"){
+        this.backgroundMusic?.play();
         this.magnetModel.setMode(mode);
         this.magnetModel.resetMagnetPosition();
 

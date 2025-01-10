@@ -139,7 +139,7 @@ export class View implements IView {
     public onButtonMenuStartB(callback: () => void): void {
         this.buttonMenuStartB.onPointerUpObservable.add(() => {
             if(this.firstTime){
-                this.rectangleAviso.isVisible = true;
+                this.rectangleAviso.isVisible = false;
                 this.firstTime = false;
             }  
         callback();

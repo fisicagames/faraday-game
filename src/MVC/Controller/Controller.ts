@@ -89,7 +89,15 @@ export class Controller {
     }
 
     private showMenu(): void {
+        this.model.backgroundMusic?.pause();
         this.view.updateMainMenuVisibility(true);
+        this.model.backgroundMusic?.pause();
+        // Verifica se o SDK está disponível e exibe o banner
+        if (typeof sdk !== 'undefined' && typeof sdk.showBanner === 'function') {
+            sdk.showBanner();
+        } else {
+            console.warn("SDK não disponível ou não inicializado corretamente.");
+        }
     }
 
     private toggleMusic(): void {

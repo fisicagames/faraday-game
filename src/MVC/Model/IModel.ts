@@ -1,3 +1,5 @@
+import { SoundModel } from "./SoundModel";
+
 export interface IModel {
     toggleMusicPlayback(): void;
     setScoreUpdateCallback(callback: (newScore: number) => void): void;
@@ -5,5 +7,7 @@ export interface IModel {
     addAccelerationToMagnet(): void;
     resetMagnetPosition(mode: "angular" | "linear"): void;
     modeEffectIntense: boolean;
+    backgroundMusic: SoundModel | undefined;
+
 
 }

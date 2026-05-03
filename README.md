@@ -5,7 +5,7 @@
 [![Babylon.js](https://img.shields.io/badge/Babylon.js-7.5.0-purple.svg)](https://www.babylonjs.com/)
 [![Vite](https://img.shields.io/badge/Vite-5.2.11-yellow.svg)](https://vitejs.dev/)
 
-An interactive simulation on Faraday's Law of Electromagnetic Induction, built on a custom MVC framework using Babylon.js.
+An interactive simulation on Faraday's Law of Electromagnetic Induction — the first SHIFT simulation to introduce a custom **callback-based Mediator pattern** for event flow.
 
 ### [🎮 Play Now!](https://fisicagames.com.br/)
 
@@ -19,7 +19,6 @@ An interactive simulation on Faraday's Law of Electromagnetic Induction, built o
 * [Tech Stack](#-tech-stack)
 * [Installation and Setup](#-installation-and-setup)
 * [Architecture and Technical Highlights](#-architecture-and-technical-highlights)
-* [Screenshots](#-screenshots)
 * [License](#-license)
 * [Author](#-author)
 
@@ -27,50 +26,42 @@ An interactive simulation on Faraday's Law of Electromagnetic Induction, built o
 
 ## 📖 About the Game
 
-**Faraday Game** is an interactive simulation inspired by Faraday's Law, allowing players to explore electromagnetic induction. The objective is to move a magnet to change the magnetic flux through a coil, inducing electric current and lighting up a lamp. Players test their skills to maximize light intensity and learn about one of the fundamental principles of electromagnetism in a playful and accessible way.
+**Faraday Game** is the sixth simulation of the SHIFT series, developed in a single weekend (December 7–8, 2024). It illustrates Faraday's Law of Electromagnetic Induction by allowing the player to move a magnet in two distinct ways — angular (rotating in front of the coil) or linear (moving vertically through the coil) — to induce voltage and light up a lamp.
 
-The game demonstrates **Faraday's Law of Electromagnetic Induction**, which states that a change in magnetic flux through a coil generates an electromotive force (EMF), responsible for the electric current. The faster the magnet moves, the greater the change in magnetic flux, resulting in a higher voltage in the coil.
+The faster the magnet moves, the greater the rate of change of magnetic flux, and the higher the induced voltage and light intensity. The game was developed quickly, validating both the MVC architecture introduced in the previous simulation and a new event-flow pattern based on chained callbacks.
 
 ---
 
 ## ✨ Key Features
 
-* **Simple Interaction:** Single-button or touch control for accessible and engaging gameplay.
+* **Single-Button Interaction:** Single-button or touch control for accessible and engaging gameplay.
 * **Two Game Modes:**
   * **Angular Motion:** The magnet rotates in front of the coil.
-  * **Linear Motion:** The magnet moves vertically back and forth, passing through the coil.
+  * **Linear Motion:** The magnet moves vertically through the coil.
 * **Score System:** The voltage generated in the coil is converted into a score:
-  * 🥉 **Bronze:** 24 V or higher.
+  * 🥇 **Gold:** 24 V or higher.
   * 🥈 **Silver:** 60 V or higher.
-  * 🥇 **Gold:** 110 V or higher.
+  * 🥉 **Bronze:** 110 V or higher.
 * **Multilingual:** Native support for Portuguese and English.
-* **Easter Egg:** Use multiple touches (mobile) or keys (keyboard) to discover "hack mode" and generate much higher voltages.
+* **Easter Egg "Hack Mode":** Use multiple touches (mobile) or keys (keyboard) to discover a hidden mode that generates much higher voltages.
 * **Photosensitivity Awareness:** Two visual effect modes — **Intense Effects** (full experience with rapid lighting changes) and **Soft Effects** (adapted for users with photosensitive conditions).
 
 ---
 
 ## 🕹 How to Play
 
-**Objective:** Move the magnet as fast as possible to maximize the generated voltage and light up the lamp at the highest intensity.
+**Objective:** Move the magnet as fast as possible to maximize the induced voltage and light up the lamp.
 
 #### Controls
 
-💻 **On PC:**
+💻 **On PC:** Spacebar or any key — multiple key presses trigger the easter egg "hack mode".
 
-* **[ Spacebar ]** or any key: Activate the magnet motion.
-* Multiple key presses: Trigger "hack mode" for extreme voltages.
-
-📱 **On Mobile / Touch:**
-
-* **[ Tap ]** the on-screen button to activate the magnet.
-* Multiple touches: Trigger "hack mode".
+📱 **On Mobile / Touch:** Tap the on-screen button — multiple touches trigger "hack mode".
 
 #### Game Modes
 
 * **Angular:** Rotate the magnet in front of the coil.
 * **Linear:** Move the magnet vertically through the coil.
-
-Generate voltages above 24 V to earn medals and challenge your limits.
 
 ---
 
@@ -78,7 +69,7 @@ Generate voltages above 24 V to earn medals and challenge your limits.
 
 | Tool                                       | Version | Description                                                              |
 | ------------------------------------------ | ------- | ------------------------------------------------------------------------ |
-| [TypeScript](https://www.typescriptlang.org/) | 5.7.2   | Core language, providing type safety and robust architecture.            |
+| [TypeScript](https://www.typescriptlang.org/) | 5.7.2   | Core language, providing type safety and modular architecture.           |
 | [Babylon.js](https://www.babylonjs.com/)      | 7.5.0   | Graphics engine for 3D rendering, animations, particles, and GUI system. |
 | [Vite.js](https://vitejs.dev/)                | 5.2.11  | Build tool for ES6 module compilation, tree-shaking, and optimization.   |
 | [Node.js](https://nodejs.org/en)              | 20+     | Development environment and runtime.                                     |
@@ -87,46 +78,58 @@ Generate voltages above 24 V to earn medals and challenge your limits.
 
 ## 🚀 Installation and Setup
 
-**Prerequisites:**
+**Prerequisites:** Node.js (v20+), npm (v10+).
 
-* Node.js (v20 or higher)
-* NPM (v10 or higher)
-
-**Steps:**
-
-1. Clone the repository.
-2. Install dependencies:
-   ```sh
-   npm install
-   ```
-3. Start the development server:
-   ```sh
-   npm run dev
-   ```
-4. Build for production (generates the `dist` folder):
-   ```sh
-   npm run build
-   ```
+```sh
+npm install
+npm run dev      # development server
+npm run build    # production build (generates the dist folder)
+```
 
 ---
 
 ## 🏗 Architecture and Technical Highlights
 
-The project uses a **custom MVC Framework written in TypeScript**, allowing the simulation to run natively in mobile browsers without requiring full-screen APIs or third-party app installations.
+**Faraday Game** consolidates the MVC architecture introduced in *Pendulum Goal* and adds a new pattern: a custom **callback-based Mediator pattern** for event flow between modules.
 
-Data flow is organized using the **Model-View-Controller (MVC)** pattern via callbacks:
+#### The Callback-Based Mediator Pattern
 
-* **Model:** A render-agnostic layer that computes the induced EMF using a manual approximation of Faraday's Law, derived from the magnet's instantaneous angular or linear velocity relative to the coil.
-* **View:** Constructs the interface via Babylon GUI and manages reactive translations (Portuguese / English), updating the UI based on state changes.
-* **Controller:** Processes input events and coordinates the physics update cycle, optimizing battery consumption on mobile devices.
+Rather than using a centralized event bus or pub/sub system, this simulation introduces an explicit linear event flow. When an inner class needs to communicate with an outer class, the event passes through every intermediate class as a chained callback, where each intermediate may intercept, augment, or simply forward the event.
 
-The induced voltage is rendered through a real-time light intensity model on the lamp, creating an immediate visual feedback loop between the magnet's motion and the resulting current.
+For a chain `A → C → B`, where `C` is intermediate, `C` registers a callback for `A` and forwards (with optional behavior added) to `B`. This produces:
+
+* **Linear traceability** of event flow — easy to follow during debugging.
+* **Direct coupling only between adjacent classes** — minimizing surface area for bugs.
+* **Flexibility** — any intermediate class can become a mediator without modifying source or destination classes.
+* **No state machines or central event managers** — flow is explicit and sequential.
+
+This pattern adapts ideas from the **Mediator**, **Observer**, and **Chain of Responsibility** classical design patterns into a custom solution tailored to the needs of the SHIFT framework.
+
+#### Physics Modeling
+
+The simulation implements a simplified version of **Faraday's Law of Induction**:
+
+```
+ε = −N · dΦ_B / dt
+```
+
+* **Angular mode:** The induced voltage is approximated as proportional to `−sin(θ) · ω`, where θ is the rotation angle and ω the angular velocity.
+* **Linear mode:** The induced voltage is approximated as proportional to `v · cos(y / 16.5)`, where v is the magnet's linear velocity and y its vertical position relative to the coil. The cosine modulation is a heuristic, not physically rigorous, but sufficient to capture the sign change of the induced EMF as the magnet enters and exits the coil.
+
+The lamp brightness is computed in real time as `Math.abs(component * 500)`. A simplified mode (without the positional modulation) is provided as the **Soft Effects** option for users with photosensitive conditions.
+
+The simplifications were intentional, prioritizing fast development (two days) and a hypercasual interaction style over physical rigor. The simulation succeeds in conveying the qualitative relationship between magnet motion and induced voltage.
 
 ---
 
 ## 📸 Screenshots
 
-![1736427437192](image/README/1736427437192.png) ![1736430149649](image/README/1736430149649.png) ![1736427290232](image/README/1736427290232.png) ![1736427372093](image/README/1736427372093.png)
+<p align="center">
+  <img src="image/README/1736427437192.png" width="22%" alt="Faraday Game screenshot 1" />
+  <img src="image/README/1736430149649.png" width="22%" alt="Faraday Game screenshot 2" />
+  <img src="image/README/1736427290232.png" width="22%" alt="Faraday Game screenshot 3" />
+  <img src="image/README/1736427372093.png" width="22%" alt="Faraday Game screenshot 4" />
+</p>
 
 ---
 
@@ -147,10 +150,9 @@ Music and sound effects in this project are sourced from [Pixabay](https://pixab
 ### Third-Party Libraries
 
 * **Babylon.js** — Apache License 2.0
-* **Havok Physics** — Per vendor terms (Babylon.js distribution)
 * **Vite.js** — MIT License
 
-**Copyright © 2025 Rafael João Ribeiro.**
+**Copyright © 2024 Rafael João Ribeiro.**
 
 ---
 
@@ -160,5 +162,3 @@ Developed by:
 **Prof. Dr. Rafael João Ribeiro**
 Federal Institute of Paraná (IFPR)
 [www.fisicagames.com.br](https://www.fisicagames.com.br)
-
----

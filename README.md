@@ -19,6 +19,7 @@ An interactive simulation on Faraday's Law of Electromagnetic Induction, built o
 * [Tech Stack](#-tech-stack)
 * [Installation and Setup](#-installation-and-setup)
 * [Architecture and Technical Highlights](#-architecture-and-technical-highlights)
+* [Screenshots](#-screenshots)
 * [License](#-license)
 * [Author](#-author)
 
@@ -123,7 +124,7 @@ The induced voltage is rendered through a real-time light intensity model on the
 
 ---
 
-## Telas do Jogo
+## Screenshots
 
 ![1736427437192](image/README/1736427437192.png)
 

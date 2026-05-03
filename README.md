@@ -124,7 +124,7 @@ The induced voltage is rendered through a real-time light intensity model on the
 
 ---
 
-## Screenshots
+## 📸 Screenshots
 
 ![1736427437192](image/README/1736427437192.png)
 
